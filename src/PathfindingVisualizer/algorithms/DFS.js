@@ -4,12 +4,12 @@ export function DFS(grid, startNode, finishNode) {
   const unvisitedNodes = [startNode];
   while (!!unvisitedNodes.length) {
     const closestNode = unvisitedNodes.pop();
-    visitedNodesInOrder.push(closestNode);
+
     // If we encounter a wall, we skip it.
     if (closestNode.isWall) continue;
 
     closestNode.isVisited = true;
-
+    visitedNodesInOrder.push(closestNode);
     if (closestNode === finishNode) return visitedNodesInOrder;
     updateUnvisitedNeighbors(closestNode, grid, unvisitedNodes);
   }
