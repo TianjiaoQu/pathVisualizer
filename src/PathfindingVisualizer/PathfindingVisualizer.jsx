@@ -14,9 +14,9 @@ export default class PathfindingVisualizer extends Component {
       grid: [],
       mouseIsPressed: false,
       start_row: 10,
-      start_col: 15,
+      start_col: 10,
       finish_row: 10,
-      finish_col: 45,
+      finish_col: 35,
       setStart: false,
       setFinish: false
     };
@@ -39,7 +39,7 @@ export default class PathfindingVisualizer extends Component {
     const grid = [];
     for (let row = 0; row < 25; row++) {
       const currentRow = [];
-      for (let col = 0; col < 55; col++) {
+      for (let col = 0; col < 42; col++) {
         const node = this.createNode(col, row);
         currentRow.push(node);
       }
@@ -78,7 +78,7 @@ export default class PathfindingVisualizer extends Component {
   handleMouseMove(row, col) {
     if (this.state.setFinish) {
       for (let r = 0; r < 25; r++) {
-        for (let c = 0; c < 55; c++) {
+        for (let c = 0; c < 42; c++) {
           const n = this.state.grid[r][c];
           if (n.isFinish) {
             const newN = {
@@ -98,7 +98,7 @@ export default class PathfindingVisualizer extends Component {
       this.setState({ finish_row: row, finish_col: col });
     } else if (this.state.setStart) {
       for (let r = 0; r < 25; r++) {
-        for (let c = 0; c < 55; c++) {
+        for (let c = 0; c < 42; c++) {
           const n = this.state.grid[r][c];
           if (n.isStart) {
             const newN = {
@@ -132,7 +132,7 @@ export default class PathfindingVisualizer extends Component {
     const { grid } = this.state;
 
     for (let row = 0; row < 25; row++) {
-      for (let col = 0; col < 55; col++) {
+      for (let col = 0; col < 42; col++) {
         const node = grid[row][col];
         if (node.isStart || node.isFinish) {
         } else {
@@ -153,7 +153,7 @@ export default class PathfindingVisualizer extends Component {
     const { grid } = this.state;
 
     for (let row = 0; row < 25; row++) {
-      for (let col = 0; col < 55; col++) {
+      for (let col = 0; col < 42; col++) {
         const node = grid[row][col];
         if (node.isStart || node.isFinish || node.isWall) {
         } else {
