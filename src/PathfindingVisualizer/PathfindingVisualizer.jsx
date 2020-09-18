@@ -6,6 +6,11 @@ import { DFS } from "./algorithms/DFS";
 import { aStar } from "./algorithms/aStar";
 import { greedy } from "./algorithms/greedy";
 import "./PathfindingVisualizer.css";
+import introJs from 'intro.js';
+import 'intro.js/introjs.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 export default class PathfindingVisualizer extends Component {
   constructor() {
@@ -20,6 +25,40 @@ export default class PathfindingVisualizer extends Component {
       setStart: false,
       setFinish: false
     };
+  }
+ startIntro(){
+    var intro = introJs();
+      intro.setOptions({
+        steps: [
+          { 
+            intro: "Thank you for playing with PathVisualizer"
+          },
+          { 
+            intro: "Use mouse to choose your Start <b>(yellow icon)</b> and End <b>(pink icon)</b> position."
+          },
+          {
+
+            intro: "Click at any other position to set up Walls"
+          },
+          {
+            element: document.getElementById("algorithm"),
+            intro: "Play with different Graph Algorithms here",
+            position: 'bottom'
+          },
+          {
+            element: document.getElementById("path"),
+            intro: "Clear out current path here",
+            position: 'bottom'
+          },
+          {
+            element: document.getElementById("board"),
+            intro: "Clear out current wall here",
+            position: 'bottom'
+          }
+        ]
+      });
+
+      intro.start();
   }
   createNode(col, row) {
     return {
@@ -62,6 +101,7 @@ export default class PathfindingVisualizer extends Component {
   componentDidMount() {
     const grid = this.getInitialGrid();
     this.setState({ grid });
+    
   }
 
   handleMouseDown(row, col, isFinish, isStart) {
@@ -251,8 +291,9 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <>
-        <div className="bars">
-          <button onClick={() => this.visualizeDijkstra()}>
+        <div className="container">
+        <div className="bars" id="algorithm">
+         <button onClick={() => this.visualizeDijkstra()}>
             Dijkstra's Algorithm
           </button>
           <button onClick={() => this.visualizeBFS()}>
@@ -267,8 +308,11 @@ export default class PathfindingVisualizer extends Component {
           <button onClick={() => this.visualizeGreedy()}>
             Greedy Best-first Search Algorithm
           </button>
-          <button onClick={() => this.clearBoard()}>Clear Board</button>
-          <button onClick={() => this.clearPath()}>Clear Path</button>
+          
+          <button id="board" onClick={() => this.clearBoard()}>Clear Board</button>
+          <button id="path" onClick={() => this.clearPath()}>Clear Path</button>
+          <FontAwesomeIcon style={{paddingLeft: "20px"}} icon={faInfoCircle} touchRadius="18" onClick={() => this.startIntro()} color="red"/>
+        </div>
         </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
